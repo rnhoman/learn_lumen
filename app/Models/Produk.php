@@ -17,12 +17,9 @@ class Produk extends Model
         'nama', 'harga', 'warna', 'kondisi', 'deskripsi', 
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
+    public $timestamps = true;
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:m:s',
+        'updated_at' => 'datetime:Y-m-d H:m:s',
     ];
 }

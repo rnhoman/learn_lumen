@@ -13,7 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    // return $router->app->version();
-    return 'halo dunia';
-});
+$router->post('/create', 'ProdukController@create');
+$router->get('/index', 'ProdukController@index');
+$router->get('/index/{id}', 'ProdukController@show');
