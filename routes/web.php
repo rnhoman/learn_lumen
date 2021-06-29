@@ -1,4 +1,5 @@
 <?php
+use \Laravel\Lumen\Routing\Router as router;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -13,6 +14,12 @@
 |
 */
 
+// $router->post('/create', function() use ($router) {
+//     $router->post(['create'], 'ProdukController@create');
+// });
+
 $router->post('/create', 'ProdukController@create');
 $router->get('/index', 'ProdukController@index');
 $router->get('/index/{id}', 'ProdukController@show');
+$router->put('/update/{id}', 'ProdukController@update');
+$router->delete('/delete/{id}', 'ProdukController@destroy');

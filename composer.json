@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "fruitcake/laravel-cors": "^2.0",
         "laravel/lumen-framework": "^8.0"
     },
     "require-dev": {
@@ -35,6 +36,7 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ]
+        ],
+        "serve": "php -S localhost -t public public/index.php"
     }
 }

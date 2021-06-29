@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProdukController extends Controller
 {
@@ -58,15 +56,59 @@ class ProdukController extends Controller
         if($cekNama) {
             return response()->json([
                 'code'          => 422,
-                'descriptions'  => 'Data sudah ada, gagal disimpan',
+                'descriptions'  => 'Data sudah ada, gagal di simpan',
             ]);
         }
 
         $create = Produk::create($data);
         return response()->json([
             'code'          => 200,
-            'descriptions'  => 'Data berhasil disimpan',
+            'descriptions'  => 'Data berhasil di simpan',
             'Contents'      => $create 
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $produk = Produk::find($id);
+        $this->validate($request, [
+            'nama'      => 'string',
+            'harga'     => 'integer',
+            'warna'     => 'string', 
+            'kondisi'   => 'in:baru, lama', 
+            'deskripsi' => 'string',
+        ]);
+        $data = $request->all();
+
+        if(!$produk) {
+            return response()->json([
+                'code'          => 404,
+                'descriptions'  => 'Data tidak ditemukan',
+            ]);
+        }
+        $produk->fill($data);
+        $produk->save();
+        return response()->json([
+            'code'          => 200,
+            'descriptions'  => 'Data berhasil di rubah',
+            'Contents'      => $produk 
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $produk = Produk::find($id);
+        if(!$produk) {
+            return response()->json([
+                'code'          => 404,
+                'descriptions'  => 'Data tidak ditemukan',
+            ]);
+        }
+
+        $produk->delete();
+        return response()->json([
+            'code'          => 200,
+            'descriptions'  => 'Data berhasil di hapus',
         ]);
     }
 
