@@ -23,3 +23,5 @@ $router->get('/index', 'ProdukController@index');
 $router->get('/index/{id}', 'ProdukController@show');
 $router->put('/update/{id}', 'ProdukController@update');
 $router->delete('/delete/{id}', 'ProdukController@destroy');
+$router->post('/registrasi', 'UsersController@register');
+$router->post('/login', 'UsersController@login');
